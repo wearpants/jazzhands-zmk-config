@@ -1,0 +1,124 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+#define STD_L 0
+#define STD_123_L 1
+
+#define LP 0
+#define LR 1
+#define LM 2
+#define LI 3
+
+#define RI 4
+#define RM 5
+#define RR 6
+#define RP 7
+
+&mt {
+  //  flavor = "tap-preferred";
+   // tapping_term_ms = <200>;
+};
+
+
+#define COMBO(LAYER,POS,USAGE) \
+      combo_##USAGE { \
+      	timeout-ms = <50>; \
+	key-positions = <POS>; \
+	layers = <LAYER>; \
+	bindings = <&kp USAGE>; \
+      };
+
+/ { 
+	combos {
+		compatible = "zmk,combos";
+		
+		COMBO(STD_L, LI RI, B)
+		
+		COMBO(STD_L, LR RI, Q)
+		// COMBO(STD_L, RM RP, BANG)
+		
+		COMBO(STD_L, LP LM, D)
+		COMBO(STD_L, LM RR, G)
+		
+		COMBO(STD_L, LP LI, F)
+		COMBO(STD_L, RI RP, M)
+		
+		COMBO(STD_L, LR RM, K)
+		
+		COMBO(STD_L, LR RI, J)
+		COMBO(STD_L, RM RR, L)
+		
+		COMBO(STD_L, LP LR, W)
+		COMBO(STD_L, LM RP, QUOT)
+		
+		COMBO(STD_L, LM LI, R)
+		COMBO(STD_L, RI RM, H)
+		
+		COMBO(STD_L, LR LI, C)
+		COMBO(STD_L, RI RR, U)
+		
+		COMBO(STD_L, LP LM, X)
+		COMBO(STD_L, LI RP, BACKSPACE)
+		
+		COMBO(STD_L, LI RM, V)
+		
+		COMBO(STD_L, LM RI, Y)
+		
+		COMBO(STD_L, LP RM, Z)
+		COMBO(STD_L, RR RP, SEMI)
+		
+		COMBO(STD_L, LM RR, COMMA)
+		
+		COMBO(STD_L, LP RP, FSLH)
+		
+		COMBO(STD_L, LP RR, LPAR)
+		COMBO(STD_L, LR RP, RPAR)
+		
+		COMBO(STD_L, LM RR, UNDER)
+		
+		COMBO(STD_L, LP LR LM LI, TAB)
+		COMBO(STD_L, RI RM RR RP, RET)
+		
+		COMBO(STD_123_L, LM LI, N5)
+		
+		combo_to_std_123 {
+			timeout-ms = <50>;
+			key-positions = <LP LI RI RP>;
+			layers = <STD_L>;
+			bindings = <&to STD_123_L>;
+		};
+		
+		combo_to_std {
+			timeout-ms = <50>;
+			key-positions = <LP LI RI RP>;
+			layers = <STD_123_L>;
+			bindings = <&to STD_L>;
+		};
+	};
+
+	keymap {
+		compatible = "zmk,keymap";
+
+		standard_layer {
+			bindings = <
+&kp A  &kp S  &kp E  &kp T      &kp N  &kp I  &kp O  &kp P 
+                     &kp LSHIFT      &kp SPACE
+				>;
+		};
+
+		standard_123_layer {
+			bindings = <
+&kp N1 &kp N2 &kp N3 &kp N4     &kp N7 &kp N8  &kp N9   &kp N0 
+                     &trans      &trans
+				>;
+		};
+	
+	};
+};

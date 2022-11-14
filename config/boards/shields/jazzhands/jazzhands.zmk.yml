@@ -1,0 +1,12 @@
+file_format: "1"
+id: jazzhands
+name: JazzHands
+type: shield
+url: https://github.com/petejohanson/jazzhands
+requires: [pro_micro]
+exposes: [i2c_oled]
+features:
+  - keys
+siblings:
+  - jazzhands_left
+  - jazzhands_right
