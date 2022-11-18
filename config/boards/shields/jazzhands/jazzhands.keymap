@@ -21,15 +21,37 @@
 #define RR 6
 #define RP 7
 
+#define A_POS LP
+#define S_POS LR
+#define E_POS LM
+#define T_POS LI
+
+#define N_POS RI
+#define I_POS RM
+#define O_POS RR
+#define P_POS RP
+
+#define N1_POS LP
+#define N2_POS LR
+#define N3_POS LM
+#define N4_POS LI
+
+#define N7_POS RI
+#define N8_POS RM
+#define N9_POS RR
+#define N0_POS RP
+
 &mt {
   //  flavor = "tap-preferred";
    // tapping_term_ms = <200>;
 };
 
 
+#define COMBO_TIMEOUT 150
+
 #define COMBO(LAYER,POS,USAGE) \
       combo_##USAGE { \
-      	timeout-ms = <50>; \
+      	timeout-ms = <COMBO_TIMEOUT>; \
 	key-positions = <POS>; \
 	layers = <LAYER>; \
 	bindings = <&kp USAGE>; \
@@ -39,65 +61,69 @@
 	combos {
 		compatible = "zmk,combos";
 		
-		COMBO(STD_L, LI RI, B)
+		COMBO(STD_L, T_POS N_POS, B)
 		
-		COMBO(STD_L, LR RI, Q)
-		// COMBO(STD_L, RM RP, BANG)
+		COMBO(STD_L, A_POS N_POS, Q)
+		// COMBO(STD_L, I_POS P_POS, BANG)
 		
-		COMBO(STD_L, LP LM, D)
-		COMBO(STD_L, LM RR, G)
+		COMBO(STD_L, S_POS E_POS, D)
+		COMBO(STD_L, T_POS O_POS, G)
 		
-		COMBO(STD_L, LP LI, F)
-		COMBO(STD_L, RI RP, M)
+		COMBO(STD_L, A_POS T_POS, F)
+		COMBO(STD_L, N_POS P_POS, M)
 		
-		COMBO(STD_L, LR RM, K)
+		COMBO(STD_L, S_POS I_POS, K)
 		
-		COMBO(STD_L, LR RI, J)
-		COMBO(STD_L, RM RR, L)
+		COMBO(STD_L, S_POS N_POS, J)
+		COMBO(STD_L, I_POS O_POS, L)
 		
-		COMBO(STD_L, LP LR, W)
-		COMBO(STD_L, LM RP, QUOT)
+		COMBO(STD_L, A_POS S_POS, W)
+		COMBO(STD_L, E_POS P_POS, QUOT)
 		
-		COMBO(STD_L, LM LI, R)
-		COMBO(STD_L, RI RM, H)
+		COMBO(STD_L, E_POS T_POS, R)
+		COMBO(STD_L, N_POS I_POS, H)
 		
-		COMBO(STD_L, LR LI, C)
-		COMBO(STD_L, RI RR, U)
+		COMBO(STD_L, S_POS T_POS, C)
+		COMBO(STD_L, N_POS O_POS, U)
 		
-		COMBO(STD_L, LP LM, X)
-		COMBO(STD_L, LI RP, BACKSPACE)
+		COMBO(STD_L, A_POS E_POS, X)
+		COMBO(STD_L, T_POS P_POS, BACKSPACE)
 		
-		COMBO(STD_L, LI RM, V)
+		COMBO(STD_L, T_POS I_POS, V)
 		
-		COMBO(STD_L, LM RI, Y)
+		COMBO(STD_L, E_POS N_POS, Y)
 		
-		COMBO(STD_L, LP RM, Z)
-		COMBO(STD_L, RR RP, SEMI)
+		COMBO(STD_L, A_POS I_POS, Z)
+		COMBO(STD_L, O_POS P_POS, SEMI)
 		
-		COMBO(STD_L, LM RR, COMMA)
+		COMBO(STD_L, E_POS I_POS, COMMA)
 		
-		COMBO(STD_L, LP RP, FSLH)
+		COMBO(STD_L, A_POS P_POS, FSLH)
 		
-		COMBO(STD_L, LP RR, LPAR)
-		COMBO(STD_L, LR RP, RPAR)
+		COMBO(STD_L, A_POS O_POS, LPAR)
+		COMBO(STD_L, S_POS P_POS, RPAR)
 		
-		COMBO(STD_L, LM RR, UNDER)
+		COMBO(STD_L, E_POS O_POS, UNDER)
 		
-		COMBO(STD_L, LP LR LM LI, TAB)
-		COMBO(STD_L, RI RM RR RP, RET)
+		COMBO(STD_L, A_POS S_POS E_POS T_POS, TAB)
+		COMBO(STD_L, N_POS I_POS O_POS P_POS, RET)
 		
-		COMBO(STD_123_L, LM LI, N5)
+		COMBO(STD_123_L, N3_POS N4_POS, N5)
+		COMBO(STD_123_L, N7_POS N8_POS, N6)
+
+		COMBO(STD_123_L, N1_POS N7_POS, TILDE)
+		// COMBO(STD_123_L, N8_POS N0_POS, BANG)
 		
 		combo_to_std_123 {
 			timeout-ms = <50>;
-			key-positions = <LP LI RI RP>;
+			key-positions = <A_POS T_POS N_POS P_POS>;
 			layers = <STD_L>;
 			bindings = <&to STD_123_L>;
 		};
 		
 		combo_to_std {
 			timeout-ms = <50>;
-			key-positions = <LP LI RI RP>;
+			key-positions = <A_POS T_POS N_POS P_POS>;
 			layers = <STD_123_L>;
 			bindings = <&to STD_L>;
 		};
