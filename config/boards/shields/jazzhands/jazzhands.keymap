@@ -58,13 +58,50 @@
       };
 
 / { 
+	ques_slash: ques_slash {
+		compatible = "zmk,behavior-mod-morph";
+        	label = "QUES_SLASH";
+        	#binding-cells = <0>;
+        	bindings = <&kp LS(SLASH)>, <&kp SLASH>;
+        	mods = <(MOD_LSFT|MOD_RSFT)>;
+	};
+
+	bang_at: bang_at {
+		compatible = "zmk,behavior-mod-morph";
+        	label = "BANG_AT";
+        	#binding-cells = <0>;
+        	bindings = <&kp LS(N1)>, <&kp LS(N2)>;
+        	mods = <(MOD_LSFT|MOD_RSFT)>;
+	};
+	lpar_bracket: lpar_bracket {
+		compatible = "zmk,behavior-mod-morph";
+        	label = "LPAR_BRKT";
+        	#binding-cells = <0>;
+        	bindings = <&kp LPAR>, <&kp LBKT>;
+        	mods = <(MOD_LSFT|MOD_RSFT)>;
+	};
+
+	rpar_bracket: rpar_bracket {
+		compatible = "zmk,behavior-mod-morph";
+        	label = "RPAR_BRKT";
+        	#binding-cells = <0>;
+        	bindings = <&kp RPAR>, <&kp RBKT>;
+        	mods = <(MOD_LSFT|MOD_RSFT)>;
+	};
+
 	combos {
 		compatible = "zmk,combos";
 		
 		COMBO(STD_L, T_POS N_POS, B)
 		
 		COMBO(STD_L, A_POS N_POS, Q)
-		// COMBO(STD_L STD_123_L, I_POS P_POS, BANG)
+
+		combo_BANG_AT {
+			timeout-ms = <COMBO_TIMEOUT>;
+			key-positions = <I_POS P_POS>;
+			layers = <STD_L STD_123_L>;
+			bindings = <&bang_at>;
+		};
 		
 		COMBO(STD_L, S_POS E_POS, D)
 		COMBO(STD_L, T_POS O_POS, G)
@@ -98,12 +135,30 @@
 		
 		COMBO(STD_L STD_123_L, E_POS I_POS, COMMA)
 		
-		COMBO(STD_L STD_123_L, A_POS P_POS, FSLH)
+		COMBO(STD_L STD_123_L, S_POS O_POS, DOT)
 		
-		COMBO(STD_L STD_123_L, A_POS O_POS, LPAR)
-		COMBO(STD_L STD_123_L, S_POS P_POS, RPAR)
+		combo_QUES_SLASH {
+			timeout-ms = <COMBO_TIMEOUT>;
+			key-positions = <A_POS P_POS>;
+			layers = <STD_L STD_123_L>;
+			bindings = <&ques_slash>;
+		};
+
+		combo_LPAR_BRKT {
+			timeout-ms = <COMBO_TIMEOUT>;
+			key-positions = <A_POS O_POS>;
+			layers = <STD_L STD_123_L>;
+			bindings = <&lpar_bracket>;
+		};
+
+		combo_RPAR_BRKT {
+			timeout-ms = <COMBO_TIMEOUT>;
+			key-positions = <S_POS P_POS>;
+			layers = <STD_L STD_123_L>;
+			bindings = <&rpar_bracket>;
+		};
 		
-		COMBO(STD_L STD_123_L, E_POS O_POS, UNDER)
+		COMBO(STD_L STD_123_L, E_POS O_POS, MINUS)
 		
 		COMBO(STD_L STD_123_L, A_POS S_POS E_POS T_POS, TAB)
 		COMBO(STD_L STD_123_L, N_POS I_POS O_POS P_POS, RET)
@@ -112,16 +167,18 @@
 		COMBO(STD_123_L, N7_POS N8_POS, N6)
 
 		COMBO(STD_123_L, N1_POS N7_POS, TILDE)
-		
+		COMBO(STD_123_L, N4_POS N7_POS, EQUAL)
+		COMBO(STD_123_L, N1_POS N8_POS, BSLH)
+
 		combo_to_std_123 {
-			timeout-ms = <50>;
+			timeout-ms = <COMBO_TIMEOUT>;
 			key-positions = <A_POS T_POS N_POS P_POS>;
 			layers = <STD_L>;
 			bindings = <&to STD_123_L>;
 		};
 		
 		combo_to_std {
-			timeout-ms = <50>;
+			timeout-ms = <COMBO_TIMEOUT>;
 			key-positions = <A_POS T_POS N_POS P_POS>;
 			layers = <STD_123_L>;
 			bindings = <&to STD_L>;
