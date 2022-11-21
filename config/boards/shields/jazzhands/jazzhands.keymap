@@ -10,6 +10,7 @@
 
 #define STD_L 0
 #define STD_123_L 1
+#define CMD_L 2
 
 #define LP 0
 #define LR 1
@@ -41,12 +42,6 @@
 #define N9_POS RR
 #define N0_POS RP
 
-&mt {
-  //  flavor = "tap-preferred";
-   // tapping_term_ms = <200>;
-};
-
-
 #define COMBO_TIMEOUT 150
 
 #define COMBO(LAYER,POS,USAGE) \
@@ -57,6 +52,12 @@
 	bindings = <&kp USAGE>; \
       };
 
+// Override some settings for existing behaviors
+&sk {
+    release-after-ms = <2000>;
+    quick-release;
+};
+
 / { 
 	ques_slash: ques_slash {
 		compatible = "zmk,behavior-mod-morph";
@@ -64,6 +65,7 @@
         	#binding-cells = <0>;
         	bindings = <&kp LS(SLASH)>, <&kp SLASH>;
         	mods = <(MOD_LSFT|MOD_RSFT)>;
+        	keep-mods = <(MOD_LSFT|MOD_RSFT)>;
 	};
 
 	bang_at: bang_at {
@@ -170,17 +172,31 @@
 		COMBO(STD_123_L, N4_POS N7_POS, EQUAL)
 		COMBO(STD_123_L, N1_POS N8_POS, BSLH)
 
-		combo_to_std_123 {
+		combo_std_to_std_123 {
 			timeout-ms = <COMBO_TIMEOUT>;
 			key-positions = <A_POS T_POS N_POS P_POS>;
 			layers = <STD_L>;
 			bindings = <&to STD_123_L>;
 		};
 		
-		combo_to_std {
+		combo_132_to_std {
 			timeout-ms = <COMBO_TIMEOUT>;
 			key-positions = <A_POS T_POS N_POS P_POS>;
 			layers = <STD_123_L>;
+			bindings = <&to STD_L>;
+		};
+
+		combo_std_to_cmd {
+			timeout-ms = <COMBO_TIMEOUT>;
+			key-positions = <E_POS S_POS I_POS O_POS>;
+			layers = <STD_L>;
+			bindings = <&to CMD_L>;
+		};
+		
+		combo_cmd_to_std {
+			timeout-ms = <COMBO_TIMEOUT>;
+			key-positions = <E_POS S_POS I_POS O_POS>;
+			layers = <CMD_L>;
 			bindings = <&to STD_L>;
 		};
 	};
@@ -190,15 +206,22 @@
 
 		standard_layer {
 			bindings = <
-&kp A  &kp S  &kp E  &kp T      &kp N  &kp I  &kp O  &kp P 
-                     &kp LSHIFT      &kp SPACE
+&kp A  &kp S  &kp E  &kp T              &kp N  &kp I  &kp O  &kp P 
+                     &kp LSHIFT         &kp SPACE
 				>;
 		};
 
 		standard_123_layer {
 			bindings = <
-&kp N1 &kp N2 &kp N3 &kp N4     &kp N7 &kp N8  &kp N9   &kp N0 
-                     &trans      &trans
+&kp N1 &kp N2 &kp N3 &kp N4             &kp N7 &kp N8  &kp N9   &kp N0 
+                     &trans             &trans
+				>;
+		};
+
+		cmd_layer {
+			bindings = <
+&sk LCTRL &sk LSFT &sk LALT &sk LGUI    &kp LEFT &kp DOWN  &kp UP   &kp RIGHT 
+                            &kp PGDN    &kp PGUP
 				>;
 		};
 	
