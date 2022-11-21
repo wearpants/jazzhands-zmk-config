@@ -60,36 +60,39 @@
 };
 
 / { 
-	ques_slash: ques_slash {
-		compatible = "zmk,behavior-mod-morph";
-        	label = "QUES_SLASH";
-        	#binding-cells = <0>;
-        	bindings = <&kp LS(SLASH)>, <&kp SLASH>;
-        	mods = <(MOD_LSFT|MOD_RSFT)>;
-        	keep-mods = <(MOD_LSFT|MOD_RSFT)>;
-	};
+	standard_mod_morphs {
+		ques_slash: ques_slash {
+			compatible = "zmk,behavior-mod-morph";
+			label = "QUES_SLASH";
+			#binding-cells = <0>;
+			bindings = <&kp LS(SLASH)>, <&kp SLASH>;
+			mods = <(MOD_LSFT|MOD_RSFT)>;
+			keep-mods = <(MOD_LSFT|MOD_RSFT)>;
+		};
 
-	bang_at: bang_at {
-		compatible = "zmk,behavior-mod-morph";
-        	label = "BANG_AT";
-        	#binding-cells = <0>;
-        	bindings = <&kp LS(N1)>, <&kp LS(N2)>;
-        	mods = <(MOD_LSFT|MOD_RSFT)>;
-	};
-	lpar_bracket: lpar_bracket {
-		compatible = "zmk,behavior-mod-morph";
-        	label = "LPAR_BRKT";
-        	#binding-cells = <0>;
-        	bindings = <&kp LPAR>, <&kp LBKT>;
-        	mods = <(MOD_LSFT|MOD_RSFT)>;
-	};
+		bang_at: bang_at {
+			compatible = "zmk,behavior-mod-morph";
+			label = "BANG_AT";
+			#binding-cells = <0>;
+			bindings = <&kp LS(N1)>, <&kp LS(N2)>;
+			mods = <(MOD_LSFT|MOD_RSFT)>;
+		};
 
-	rpar_bracket: rpar_bracket {
-		compatible = "zmk,behavior-mod-morph";
-        	label = "RPAR_BRKT";
-        	#binding-cells = <0>;
-        	bindings = <&kp RPAR>, <&kp RBKT>;
-        	mods = <(MOD_LSFT|MOD_RSFT)>;
+		lpar_bracket: lpar_bracket {
+			compatible = "zmk,behavior-mod-morph";
+			label = "LPAR_BRKT";
+			#binding-cells = <0>;
+			bindings = <&kp LPAR>, <&kp LBKT>;
+			mods = <(MOD_LSFT|MOD_RSFT)>;
+		};
+
+		rpar_bracket: rpar_bracket {
+			compatible = "zmk,behavior-mod-morph";
+			label = "RPAR_BRKT";
+			#binding-cells = <0>;
+			bindings = <&kp RPAR>, <&kp RBKT>;
+			mods = <(MOD_LSFT|MOD_RSFT)>;
+		};
 	};
 
 	combos {
