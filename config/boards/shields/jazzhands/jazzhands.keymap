@@ -11,6 +11,7 @@
 #define STD_L 0
 #define STD_123_L 1
 #define CMD_L 2
+#define FN_L 3
 
 #define LP 0
 #define LR 1
@@ -199,6 +200,20 @@
 			layers = <CMD_L>;
 			bindings = <&to STD_L>;
 		};
+
+		combo_std_to_fn {
+			timeout-ms = <COMBO_TIMEOUT>;
+			key-positions = <A_POS S_POS O_POS P_POS>;
+			layers = <STD_L>;
+			bindings = <&to FN_L>;
+		};
+		
+		combo_fn_to_std {
+			timeout-ms = <COMBO_TIMEOUT>;
+			key-positions = <A_POS S_POS O_POS P_POS>;
+			layers = <FN_L>;
+			bindings = <&to STD_L>;
+		};
 	};
 
 	keymap {
@@ -222,6 +237,13 @@
 			bindings = <
 &sk LCTRL &sk LSFT &sk LALT &sk LGUI    &kp LEFT &kp DOWN  &kp UP   &kp RIGHT 
                             &kp PGDN    &kp PGUP
+				>;
+		};
+
+		fn_layer {
+			bindings = <
+&none     &none    &none    &bt BT_CLR    &bt BT_SEL 0 &bt BT_SEL 1  &bt BT_SEL 2   &bt BT_SEL 3 
+                            &trans        &trans
 				>;
 		};
 	
