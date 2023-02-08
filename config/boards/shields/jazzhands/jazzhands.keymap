@@ -192,7 +192,7 @@
 
 		combo_std_to_cmd {
 			timeout-ms = <COMBO_TIMEOUT>;
-			key-positions = <E_POS S_POS I_POS O_POS>;
+			key-positions = <S_POS E_POS I_POS O_POS>;
 			layers = <STD_L>;
 			bindings = <&to CMD_L>;
 		};
